@@ -2017,5 +2017,21 @@ const DEFAULT_POS = [
       { index: 1, name: "Bromhexine syrup 4 mg/5 ml 60 mL. (BHXS60)", quantity: 10, unit: "ลัง 1 x(24 x 60 ml. )" },
       { index: 2, name: "GYNECONT VAGINAL TAB (GNCT)", quantity: 2, unit: "กล่อง 1x (10 x 10 tab)" }
     ]
+  },
+  {
+    id: "po-7",
+    poNumber: "PO-20260708-2673",
+    date: "2026-07-08",
+    supplier: "บ.เอ.เอ็น บี. ลาบอราตรี่",
+    status: "ส่งใบสั่งซื้อ",
+    items: [
+      { index: 1, name: "Amoxycillin 500 mg. (amx500)", quantity: 20, unit: "กระปุก 1x (50x 10 cap)" },
+      { index: 2, name: "น้ำเกลือล้างแผล 500 ml", quantity: 5, unit: "ลัง(1ลัง*20*500ml.)" },
+      { index: 3, name: "0.9% NSS 100 ml", quantity: 10, unit: "ลัง(1ลัง*20ขวด*100ml)" },
+      { index: 4, name: "น้ำเกลือล้างแผล 1000 ml", quantity: 10, unit: "ลัง(1ลัง*10ขวด*1000ml.)" },
+      { index: 5, name: "OPSAR (น้ำยาล้างตา) 110ml. (OPSAR)", quantity: 5, unit: "ลัง 1x (1x18x 110ml.)" },
+      { index: 6, name: "5%DN/3 น้ำเงิน 500ml.", quantity: 3, unit: "ลัง(1ลัง*20*500ml.)" },
+      { index: 7, name: "Sterile water ฝาเกลียวฟ้า 1000ml", quantity: 5, unit: "ลัง(1ลัง*10ขวด*1000ml.)" }
+    ]
   }
 ];

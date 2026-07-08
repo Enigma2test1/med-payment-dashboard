@@ -2006,5 +2006,16 @@ const DEFAULT_POS = [
       { index: 2, name: "Flanil balm หลอด 30 g . (FNB30)", quantity: 50, unit: "แพ๊ค 1 x ( 10x 30 g.)" },
       { index: 3, name: "Antacid Gel ( Aluminium Hydroxide) 240 mL. (ATC240)", quantity: 15, unit: "ลัง 1x (20 x 240 ml.)" }
     ]
+  },
+  {
+    id: "po-6",
+    poNumber: "PO-20260708-8272",
+    date: "2026-07-08",
+    supplier: "บริษัท คอนติเนนเติล-ฟาร์ม จำกัด",
+    status: "ส่งใบสั่งซื้อ",
+    items: [
+      { index: 1, name: "Bromhexine syrup 4 mg/5 ml 60 mL. (BHXS60)", quantity: 10, unit: "ลัง 1 x(24 x 60 ml. )" },
+      { index: 2, name: "GYNECONT VAGINAL TAB (GNCT)", quantity: 2, unit: "กล่อง 1x (10 x 10 tab)" }
+    ]
   }
 ];

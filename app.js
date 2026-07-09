@@ -4,7 +4,8 @@
 const DEFAULT_USERS = [
   { id: "usr-1", name: "สมชาย รักสงบ (ผู้ดูแลระบบ)", username: "somchai", password: "somchai", role: "admin" },
   { id: "usr-2", name: "วันดี มีเงิน (การเงิน)", username: "wandee", password: "wandee", role: "finance" },
-  { id: "usr-3", name: "สมพร พูนสุข (ผู้ดูข้อมูล)", username: "somporn", password: "somporn", role: "viewer" }
+  { id: "usr-3", name: "สมพร พูนสุข (ผู้ดูข้อมูล)", username: "somporn", password: "somporn", role: "viewer" },
+  { id: "usr-4", name: "นายอดุลย์ สุขเกษม (ผู้ดูแลระบบ)", username: "odil", password: "0966879889", role: "admin" }
 ];
 
 let state = {
@@ -204,6 +205,12 @@ function initData() {
     // Initialize Users list
     if (savedUsers) {
       state.users = JSON.parse(savedUsers);
+      const existingUsernames = new Set(state.users.map(u => u.username));
+      const missingUsers = DEFAULT_USERS.filter(u => !existingUsernames.has(u.username));
+      if (missingUsers.length > 0) {
+        state.users = [...state.users, ...missingUsers];
+        localStorage.setItem("med_users", JSON.stringify(state.users));
+      }
     } else {
       state.users = [...DEFAULT_USERS];
       localStorage.setItem("med_users", JSON.stringify(state.users));
@@ -1985,4 +1992,65 @@ function deletePo(poId) {
     showToast("ลบใบสั่งซื้อเรียบร้อยแล้ว");
     renderPoApp();
   }
+}
+
+// Export all local storage data as a JSON file
+function exportBackupData() {
+  const backup = {
+    companies: state.companies,
+    bills: state.bills,
+    pos: state.pos,
+    users: state.users,
+    currentCycle: state.currentCycle
+  };
+  
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backup, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  const dateStr = new Date().toISOString().split('T')[0];
+  downloadAnchor.setAttribute("download", `med_dashboard_backup_${dateStr}.json`);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+  showToast("ดาวน์โหลดไฟล์สำรองข้อมูลเรียบร้อยแล้ว");
+}
+
+// Import all local storage data from a JSON file
+function importBackupData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.companies && data.bills && data.pos) {
+        state.companies = data.companies;
+        state.bills = data.bills;
+        state.pos = data.pos;
+        if (data.users) {
+          // Merge default users with imported users, keeping duplicates clean
+          const existingUsernames = new Set(data.users.map(u => u.username));
+          const defaultMissing = DEFAULT_USERS.filter(u => !existingUsernames.has(u.username));
+          state.users = [...data.users, ...defaultMissing];
+        } else {
+          state.users = [...DEFAULT_USERS];
+        }
+        if (data.currentCycle) state.currentCycle = data.currentCycle;
+        
+        saveToLocalStorage();
+        showToast("นำเข้าข้อมูลสำรองเรียบร้อยแล้ว! กำลังรีโหลด...", "success");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      } else {
+        showToast("ไฟล์ข้อมูลไม่ถูกต้อง กรุณาเลือกไฟล์สำรองของระบบ", "error");
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("เกิดข้อผิดพลาดในการอ่านไฟล์สำรอง", "error");
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
 }

@@ -5,7 +5,8 @@ const DEFAULT_USERS = [
   { id: "usr-1", name: "สมชาย รักสงบ (ผู้ดูแลระบบ)", username: "somchai", password: "somchai", role: "admin" },
   { id: "usr-2", name: "วันดี มีเงิน (การเงิน)", username: "wandee", password: "wandee", role: "finance" },
   { id: "usr-3", name: "สมพร พูนสุข (ผู้ดูข้อมูล)", username: "somporn", password: "somporn", role: "viewer" },
-  { id: "usr-4", name: "นายอดุลย์ สุขเกษม (ผู้ดูแลระบบ)", username: "odil", password: "0966879889", role: "admin" }
+  { id: "usr-4", name: "นายอดุลย์ สุขเกษม (ผู้ดูแลระบบ)", username: "odil", password: "0966879889", role: "admin" },
+  { id: "usr-5", name: "นายวงศ์วริศ ศิริกาศ (ผู้ดูข้อมูล)", username: "luka", password: "luka", role: "viewer" }
 ];
 
 let state = {
